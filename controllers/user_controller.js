@@ -17,9 +17,12 @@ export const create = (req, res) => {
     userType: req.body.userType,
   });
   console.log(user)
-  user.save().then((data) => {
+  user
+    .save()
+    .then((data) => {
       res.send(data);
-    }).catch((error) => {
+    })
+    .catch((error) => {
       res.status(500).send({
         message: "Some error occurred while creating the User.",
       });

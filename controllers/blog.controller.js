@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import { resolveSoa } from 'dns';
 const Blog = require('../models/blog.model');
 // Create and Save a new Blog
 export const create = async (req, res) => {
@@ -6,14 +7,15 @@ export const create = async (req, res) => {
             return res.status(400).send({
                 message: "Blog content or title or author can not be empty"
             });}
-        try { 
-            const data = new Blog(req.body)
-            const newNews = await data.save()
-             res.status(201).json(newNews)
-          } 
-          catch (err) {
-            res.status(400).json({message: "Blog doesn`t saved "})
-          }
+        const blog = new Blog(req.body)
+        blog.save(blog)
+            .then(data =>{
+               res.send(data);
+           }).catch(err =>{
+               res.status(500).send({
+                   message:err.message || "Same error occurred while creating an article"
+               });
+           });
         }
 export const findAll = (req, res) => {
     Blog.find()
@@ -21,9 +23,8 @@ export const findAll = (req, res) => {
         res.send({
             status:"Success",
             result: blogs.length,
-            data: {
-                blogs
-            }
+            blogs
+            
         });
     })
     .catch(err => {

@@ -2,7 +2,7 @@ const { json } = require('body-parser');
  module.exports = (app) => {
 const blog = require('../controllers/blog.controller.js');
 const protection = require('../controllers/authcontroller');
-app.post('/api/v1/articles/new',protection.protect, blog.create);
+app.post('/api/v1/article/new', blog.create);
  // Retrieve all Blogs
 app.get('/api/v1/articles/', blog.findAll);
  // Retrieve one Blogs
