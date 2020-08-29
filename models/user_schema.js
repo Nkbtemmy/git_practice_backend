@@ -7,16 +7,12 @@ const schema = new mongoose.Schema(
       type: String,
       index: true,
       unique: true,
-      max:255,
-      min:6,
       required: true,
     },
     password: {
       desc: "user password",
       trim: true,
       type: String,
-      max:1024,
-      min:6,
       required: true,
       select: false,
     },
@@ -24,14 +20,9 @@ const schema = new mongoose.Schema(
       desc: "The user's name.",
       trim: true,
       type: String,
-      max:224,
-      min:6,
       required: true,
     },
     age: {
-      max:150,
-      min:10,
-      default:18,
       desc: "The users's age.",
       type: Number,
     },
@@ -54,7 +45,7 @@ const schema = new mongoose.Schema(
       trim: true,
       type: String,
       enum: ["Admin", "User"],
-      default: "Admin",
+      default: "User",
       required: true,
     },
   },
@@ -66,3 +57,4 @@ const schema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("Users", schema);
+

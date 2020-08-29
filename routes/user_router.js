@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 const userControllr = require("../controllers/user_controller");
 const autho = require('../controllers/authcontroller');
-router.post("/user/new", userControllr.create);
+router.post("/user/", userControllr.create);
 router.post('/login',autho.login);
 router.get("/users", userControllr.findAll);
 router.get("/user/:id", userControllr.findOne);
