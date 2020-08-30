@@ -55,15 +55,19 @@ export const findOne = (req, res) => {
     });
 };
 export const update = (req, res) => {
-    Blog.findOneAndUpdate(req.params.id,req.body, {new: true})
+if (!req.body.title && !req.body.content && !req.body.author) {
+        res.status(400).send({
+          message: "required fields cannot be empty",
+        });
+      }
+    Blog.findByIdAndUpdate(req.params.id,req.body, {new: true})
     .then(blog => {
-
         if(!blog) {
             return res.status(404).send({
                 message: `blog not found with id ${req.params.id}`
             });
         }
-        res.send(blog)
+        res.status(200).send(blog)
     })
     .catch(err => {
         if(err.kind === 'ObjectId') {

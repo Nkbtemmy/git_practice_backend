@@ -84,6 +84,7 @@ exports.findAll = (req, res) => {
         });
       });
   };
+  
   exports.UpdateUser = (req, res) => {
     if (!req.body.email && !req.body.password && !req.body.name) {
       res.status(400).send({
