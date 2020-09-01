@@ -4,7 +4,7 @@ const blogSchema = mongoose.Schema({
     author: String,
     content: String,
     comments: [{ body: String, date: Date }],
-    date: { type: Date, default: Date.now },
+    date: { type: Date, default: new Date().toLocaleString() },
     hidden: Boolean
 }, {
     timestamps: true
