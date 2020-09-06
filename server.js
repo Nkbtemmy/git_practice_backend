@@ -1,20 +1,16 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from './config/dbconfig';
+import cors from 'cors';
 const app = express();
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true, useUnifiedTopology: true  }))
 app.use(bodyParser.json())
 mongoose.Promise = global.Promise;
 app.get('/', (req, res) => {
     res.json({"message": "Welcome to My Blog Backend. "});
 });
-var allowCrossDomain = function(req, res, next){
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-};
-app.use(allowCrossDomain);
+
 app.post("/create", function (req, res) {
     const email = req.body.email;
     res.status(200).json({
